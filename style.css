@@ -6,11 +6,7 @@ canvas {
   background: #adff60;
   display: block;
   margin: 0 auto;
-}
-
-.buttons {
-	padding: 30px;
-}
+}=
 img {
 	position: absolute;
 	left: 50px;
