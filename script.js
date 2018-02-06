@@ -133,6 +133,9 @@ function drawTargeter() {
 // draw everything in
 function draw() {
   if (over == false) {
+    if (shots == 20 && (y >= goalY + 50 && velY <= 0)) {
+      gameOver();
+    }
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // put up text
@@ -149,9 +152,6 @@ function draw() {
     console.log(shots);
     kicked == false;
     ctx.fillText("Shots: " + (20 - shots), 900, 20);
-    if (shots == 20 && (y >= goalY + 50 && velY <= 0)) {
-      gameOver();
-    }
   }
 }
 
