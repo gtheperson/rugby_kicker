@@ -57,8 +57,10 @@ var goalY = 300;
 var player = new Image();
 player.src = "player.png";
 
-// load sounds
+// load sounds, taken from freesoundproject
 var kickSound = new Audio("261267__musita182__soccer-kick.wav");
+var cheerSound = new Audio("410868__djnicke__crowd-cheering-and-clapping.wav");
+var oohSound = new Audio("337724__schroedel__ooh-4.wav");
 
 // functions
 // functions for drawing
@@ -195,8 +197,11 @@ function moveStopScore() {
     score += 1;
     goal = false;
     scoreText = true;
-    }// if score text then print goal
-    if (scoreText == true) {
+    cheerSound.play();
+    } else {
+      oohSound.play();
+    }
+    if (scoreText == true) {// if score text then print goal
       ctx.fillText("Goal!", 300, 30);
     } 
   } // if the ball was kicked then reduce shots left
