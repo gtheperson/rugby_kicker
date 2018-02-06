@@ -193,7 +193,7 @@ function moveStopScore() {
     x += velX;// move ball
     y -= velY;
   } 
-  else { // otherwise check if a goal is scored
+  else { // otherwise check if a goal is scored and don't move ball
     if (goal == true) {
     score += 1;
     goal = false;
@@ -210,6 +210,7 @@ function moveStopScore() {
     console.log(shots + "shots");
     shotTaken = true;
     kicked = false;
+    velY = 0;
   }
 }
 
