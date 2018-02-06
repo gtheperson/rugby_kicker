@@ -199,6 +199,7 @@ function moveStopScore() {
     goal = false;
     scoreText = true;
     cheerSound.play();
+    missed = true;
     }
     if (scoreText == true) {// if score text then print goal
       ctx.fillText("Goal!", 300, 30);
@@ -208,7 +209,7 @@ function moveStopScore() {
     shots += 1;
     console.log(shots + "shots");
     shotTaken = true;
-    if (scoreText != true) {
+    if (scoreText != true && missed != true) {
       oohSound.play();
     }
     kicked = false;
@@ -242,6 +243,7 @@ function reset() {
     velY = 0;
     shotTaken = false;
     scoreText = false;
+    missed = false;
     windCalc();
   }
 }
