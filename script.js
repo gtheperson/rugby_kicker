@@ -49,6 +49,7 @@ var kicked = false;
 
 // ball passed through goal?
 var goal = false;
+var missed = false;
 // goal pos params
 var goalX = 850;
 var goalY = 300;
@@ -198,8 +199,6 @@ function moveStopScore() {
     goal = false;
     scoreText = true;
     cheerSound.play();
-    } else if (shotTaken == true) {
-      oohSound.play();
     }
     if (scoreText == true) {// if score text then print goal
       ctx.fillText("Goal!", 300, 30);
@@ -209,6 +208,9 @@ function moveStopScore() {
     shots += 1;
     console.log(shots + "shots");
     shotTaken = true;
+    if (scoreText != true) {
+      oohSound.play();
+    }
     kicked = false;
   }
 }
