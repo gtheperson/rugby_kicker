@@ -204,7 +204,7 @@ function moveStopScore() {
     if (scoreText == true) {// if score text then print goal
       ctx.fillText("Goal!", 300, 30);
     }
-    if (scoreText != true && missed != true) {
+    if (scoreText != true && missed != true && kicked == true && velY == 0) {
       oohSound.play();
     }
   } // if the ball was kicked then reduce shots left
