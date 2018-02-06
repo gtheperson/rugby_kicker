@@ -192,6 +192,16 @@ function moveStopScore() {
     shotTaken = true;
     kicked = false;
     velY = 0;
+    if (goal == true) {
+      score += 1;
+      goal = false;
+      scoreText = true;
+      cheerSound.play();
+      missed = true;
+      }
+    if (scoreText == true) {// if score text then print goal
+      ctx.fillText("Goal!", 300, 30);
+    }
   }
   // move ball and apply gravity unless ball hits 'ground'
   else if (kicked == true && velY != 0) { // if ball is moving and was kicked
@@ -201,16 +211,7 @@ function moveStopScore() {
     y -= velY;
   } 
   else { // otherwise check if a goal is scored and don't move ball
-    if (goal == true) {
-    score += 1;
-    goal = false;
-    scoreText = true;
-    cheerSound.play();
-    missed = true;
-    }
-    if (scoreText == true) {// if score text then print goal
-      ctx.fillText("Goal!", 300, 30);
-    }
+    
   } // if the ball was kicked then reduce shots left
 }
 
