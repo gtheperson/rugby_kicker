@@ -186,8 +186,15 @@ function windCalc() {
 
 // move the ball or check if a goal was scored and then adjust points etc
 function moveStopScore() {
+  if (kicked == true && y > goalY + 50 && velY < 0) {// if ball is moving downward and is below the goal turn kick off so ball stops moving and do score stuff
+    shots += 1;
+    console.log(shots + "shots");
+    shotTaken = true;
+    kicked = false;
+    velY = 0;
+  }
   // move ball and apply gravity unless ball hits 'ground'
-  if (kicked == true && velY != 0) { // if ball is moving and was kicked
+  else if (kicked == true && velY != 0) { // if ball is moving and was kicked
     velY -= grav;// reduce velY
     velX -= wind;
     x += velX;// move ball
@@ -205,13 +212,6 @@ function moveStopScore() {
       ctx.fillText("Goal!", 300, 30);
     }
   } // if the ball was kicked then reduce shots left
-  if (kicked == true && y > goalY + 50 && velY < 0) {// if ball is moving downward and is below the goal turn kick off so ball stops moving and do score stuff
-    shots += 1;
-    console.log(shots + "shots");
-    shotTaken = true;
-    kicked = false;
-    velY = 0;
-  }
 }
 
 function kickFunc(evt) {
