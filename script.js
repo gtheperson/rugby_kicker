@@ -199,9 +199,6 @@ function moveStopScore() {
       cheerSound.play();
       missed = true;
       }
-    if (scoreText == true) {// if score text then print goal
-      ctx.fillText("Goal!", 300, 30);
-    }
   }
   // move ball and apply gravity unless ball hits 'ground'
   else if (kicked == true && velY != 0) { // if ball is moving and was kicked
@@ -210,9 +207,9 @@ function moveStopScore() {
     x += velX;// move ball
     y -= velY;
   } 
-  else { // otherwise check if a goal is scored and don't move ball
-    
-  } // if the ball was kicked then reduce shots left
+  if (scoreText == true) {// if score text then print goal
+      ctx.fillText("Goal!", 300, 30);
+    }
 }
 
 function kickFunc(evt) {
