@@ -57,6 +57,9 @@ var goalY = 300;
 var player = new Image();
 player.src = "player.png";
 
+// load sounds
+var kickSound = new Audio("261267__musita182__soccer-kick.wav");
+
 // functions
 // functions for drawing
 function drawBall() {
@@ -211,6 +214,7 @@ function kickFunc(evt) {
     velX = newVelX;
     velY = newVelY;
     console.log("Kick Y " + velY + " kick x " + velX)
+    kickSound.play();
   }// let it be known the ball was kicked, controls number of shots taken
   kicked = true;
 }
