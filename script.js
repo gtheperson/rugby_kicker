@@ -198,7 +198,7 @@ function moveStopScore() {
     goal = false;
     scoreText = true;
     cheerSound.play();
-    } else {
+    } else if (shotTaken == true) {
       oohSound.play();
     }
     if (scoreText == true) {// if score text then print goal
