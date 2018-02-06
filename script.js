@@ -204,9 +204,6 @@ function moveStopScore() {
     if (scoreText == true) {// if score text then print goal
       ctx.fillText("Goal!", 300, 30);
     }
-    if (scoreText != true && missed != true && kicked == true) {
-      oohSound.play();
-    }
   } // if the ball was kicked then reduce shots left
   if (kicked == true && y > goalY + 50 && velY < 0) {// if ball is moving downward and is below the goal turn kick off so ball stops moving and do score stuff
     shots += 1;
@@ -243,7 +240,6 @@ function reset() {
     velY = 0;
     shotTaken = false;
     scoreText = false;
-    missed = false;
     windCalc();
   }
 }
