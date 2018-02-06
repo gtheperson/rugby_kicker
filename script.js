@@ -198,6 +198,9 @@ function moveStopScore() {
       scoreText = true;
       cheerSound.play();
       missed = true;
+      } else if (missed == false) {
+        oohSound.play();
+        missed = true;
       }
   }
   // move ball and apply gravity unless ball hits 'ground'
@@ -239,6 +242,7 @@ function reset() {
     velY = 0;
     shotTaken = false;
     scoreText = false;
+    missed = false;
     windCalc();
   }
 }
