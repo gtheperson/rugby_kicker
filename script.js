@@ -6,7 +6,7 @@ ctx.font = "20px impact";
 // sore and text that diplays/ controls if a new goal is loaded up
 var score = 0;
 var scoreText = false;
-var shots = 10;
+var shots = 10;// number of kicks
 var shotTaken = false;
 var over = false;
 
@@ -42,7 +42,7 @@ var grav = 0.03;
 // wind that blows ball left or right
 var wind = 0;// pos to slow, neg to speed
 var windImg = new Image();
-windImg.src = "nowind.png";
+windImg.src = "images/nowind.png";
 
 // a var to control if num of shots reduced
 var kicked = false;
@@ -51,17 +51,24 @@ var kicked = false;
 var goal = false;
 var missed = false;
 // goal pos params
-var goalX = 850;
-var goalY = 300;
+var goalX = 880;
+var goalY = 250;
 
 // load images
 var player = new Image();
-player.src = "player.png";
+player.src = "images/player.png";
+var background = new Image();
+background.src = "images/background.png";
+var goalImg = new Image();
+goalImg.src = "images/goal.png";
 
 // load sounds, taken from freesoundproject
-var kickSound = new Audio("261267__musita182__soccer-kick.wav");
-var cheerSound = new Audio("410868__djnicke__crowd-cheering-and-clapping.wav");
-var oohSound = new Audio("337724__schroedel__ooh-4.wav");
+var kickSound = new Audio("sounds/musita182_soccer_kick.wav");
+kickSound.volume = 0.2;
+var cheerSound = new Audio("sounds/djnicke_crowd_cheering.wav");
+cheerSound.volume = 0.03;
+var oohSound = new Audio("sounds/schroedel_ooh.wav");
+oohSound.volume = 0.03;
 
 // functions
 // functions for drawing
@@ -74,29 +81,6 @@ function drawBall() {
   ctx.closePath();
 }
 
-function drawGoal() {
-  // draw left post
-  ctx.beginPath();
-  ctx.rect(goalX + 10, goalY, 30, 10);
-  ctx.fillStyle = "black";
-  ctx.fill();
-  ctx.closePath();
-  // draw middle bar
-  ctx.beginPath();
-  ctx.rect(goalX, goalY - 70, 10, 100);
-  ctx.fillStyle = "black";
-  ctx.fill();
-  ctx.closePath();
-  // draw the ball
-  drawBall();
-  // do this so the right post is after the ball, so the ball passes behind it
-  // right post
-  ctx.beginPath();
-  ctx.rect(goalX + 40, goalY - 70, 10, 100);
-  ctx.fillStyle = "black";
-  ctx.fill();
-  ctx.closePath();
-}
 
 // draw targeting line
 function drawTargeter() {
@@ -138,14 +122,16 @@ function draw() {
     }
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // background image first
+    ctx.drawImage(background, 0, 0);
     // put up text
     ctx.fillText("Score: " + score, 10, 20);
+    ctx.drawImage(goalImg, goalX, goalY);
     ctx.drawImage(player, initX - 70, initY - 60);// put draw player image
-    ctx.drawImage(windImg, 900, 400);
+    ctx.drawImage(windImg, 905, 400);
+    drawBall();
     // redraw ball
     //drawBall();
-    // redraw goal
-    drawGoal();
     drawTargeter();
     hasScored();
     moveStopScore();
@@ -157,7 +143,7 @@ function draw() {
 
 // check if ball passes through goal posts
 function hasScored() {
-  if ((x > goalX + 10 && x < goalX + 40) && (y > goalY - 70 && y < goalY)) {
+  if ((x > goalX && x < goalX + 35) && (y > goalY && y < goalY + 100)) {
     goal = true;
   }
 }
@@ -167,38 +153,38 @@ function windCalc() {
   var windNum = Math.random();
   if (windNum > 0.75) {
     console.log("strong left wind");
-    windImg.src = "slwind.png";
+    windImg.src = "images/slwind.png";
     wind = 0.02;
   } else if (windNum > 0.5) {
     console.log("weak left wind");
-    windImg.src = "wlwind.png";
+    windImg.src = "images/wlwind.png";
     wind = 0.01;
   } else if (windNum > 0.25) {
     console.log("weak right wind");
-    windImg.src = "wrwind.png";
+    windImg.src = "images/wrwind.png";
     wind = -0.01;
   } else {
     console.log("strong right wind");
-    windImg.src = "srwind.png";
+    windImg.src = "images/srwind.png";
     wind = -0.02;
   }
 }
 
 // move the ball or check if a goal was scored and then adjust points etc
 function moveStopScore() {
-  if (kicked == true && y > goalY + 50 && velY < 0) {// if ball is moving downward and is below the goal turn kick off so ball stops moving and do score stuff
+  if (kicked == true && y > goalY + 120 && velY < 0) {// if ball is moving downward and is below the goal turn kick off so ball stops moving and do score stuff
     shots += 1;
     console.log(shots + "shots");
     shotTaken = true;
     kicked = false;
     velY = 0;
-    if (goal == true) {
+    if (goal == true) {//once stopped if ball passed through goal then do score stuff
       score += 1;
       goal = false;
       scoreText = true;
       cheerSound.play();
       missed = true;
-      } else if (missed == false) {
+      } else if (missed == false) { //else play boo
         oohSound.play();
         missed = true;
       }
@@ -211,7 +197,7 @@ function moveStopScore() {
     y -= velY;
   } 
   if (scoreText == true) {// if score text then print goal
-      ctx.fillText("Goal!", 300, 30);
+      ctx.fillText("Goal!", 480, 20);
     }
 }
 
@@ -236,7 +222,7 @@ function reset() {
   if (shotTaken == true) {
     initX = Math.floor(Math.random() * 700 + 50);
     x = initX;
-    initY = Math.floor(Math.random() * 300) + 50;
+    initY = Math.floor(Math.random() * 300) + 200;
     y = initY;
     velX = 0;
     velY = 0;
