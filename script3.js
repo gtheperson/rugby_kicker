@@ -10,10 +10,8 @@ if (!localStorage.highscore) {
 } else {
   var highScore = localStorage.highscore;
 }
-// timer variables
+
 var tenMilSec = 0;
-var seconds;
-var gameLength = 60;
 
 var scoreText = false;
 var shots = 10;// number of kicks
@@ -141,10 +139,9 @@ function drawTargeter() {
 // draw everything in
 function draw() {
   if (over == false) {
-    if (seconds == 0) {
+    if (shots == 20 && (y >= goalY + 50 && velY <= 0)) {
       gameOver();
     }
-    timer();
     // clear canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     // background image first
@@ -162,7 +159,7 @@ function draw() {
     moveStopScore();
     console.log(shots);
     kicked == false;
-    ctx.fillText("Seconds: " + (seconds), 850, 20);
+    ctx.fillText("Shots: " + (20 - shots), 900, 20);
   }
 }
 
@@ -276,12 +273,6 @@ function getMousePos(canvas, evt) {
     y: evt.clientY - rect.top
   };
 }
-
-function timer() {
-  tenMilSec += 1;
-  seconds = Math.max(gameLength -Math.floor(tenMilSec / 100), 0);
-}
-
 // when mouse is moved get its x and y, and assign values to velocities
 canvas.addEventListener("mousemove", function(evt) {
   mousePos = getMousePos(canvas, evt);
@@ -314,8 +305,6 @@ document.getElementById("restart").addEventListener("click", function(evt) {
   shots = 10;
   kicked = false;
   missed = false;
-  tenMilSec = 0;
-  seconds = gameLength;
   reset();
 })
 

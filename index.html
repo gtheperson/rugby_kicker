@@ -3,6 +3,7 @@
 <head>
 	<title>Rugby Kicker</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
 </head>
 
 <body>
@@ -10,9 +11,20 @@
     <canvas id="myCanvas" width="1000" height ="500"></canvas>
 
 	<div class="game-over">
-		<p>Game Over</p>
+		<h2>Game Over</h2>
+		<p>High Score: <span id="high-score"></span></p>
 		<p>Score: <span id="score-span"></span></p>
-		<a href=""><button>Play Again</button></a>
+		<a><button id="restart">Play Again</button></a>
+	</div>
+
+	<div class="intro vis">
+		<h2>Rugby Kicker</h2>
+		<p>Welcome to Rugby Kicker! The object is the kick the ball through the goal.</p>
+		<p>Click to kick, using the dashed line to help judge your strength and angle.</p>
+		<p>Once you've kicked clicked again to set up a new kick.</p>
+		<p>Keep an eye on the wind sock to judge the wind.</p>
+		<p>Score as many goals as you can in the time limit!</p>
+		<a><button id="begin">Begin</button></a>
 	</div>
   
 
